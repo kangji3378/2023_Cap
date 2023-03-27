@@ -1,18 +1,22 @@
 import math
 
+# point1, point2's uclidean distance
 def dist(point1, point2):
     return ((point1[0] - point2[0]) ** 2 + (point1[1] - point2[1]) ** 2) ** .5
 
+# polar coordinate system
 def rect(r, theta):
     x = r * math.cos(math.radians(theta))
     y = r * math.sin(math.radians(theta))
     return x, y
 
+# radis and theta of x, y
 def polar(x, y):
     r = (x ** 2 + y ** 2) ** .5
-    theta = math.degrees(math.atan2(y,x))
+    theta = math.degrees(math.atan2(y,x)) # arc-tangent of radis
     return r, theta
 
+# set angle between 0 and 180
 def angle_mod_360(angle):
     n = math.floor(angle/360.0)
     angle_between_0_and_360 = angle - n*360.0
@@ -21,11 +25,13 @@ def angle_mod_360(angle):
     else:
         return angle_between_0_and_360 - 360
 
+# horizon waypoints
 def get_waypoints_ordered_in_driving_direction(params):
     if params['is_reversed']: # driving clock wise.
         return list(reversed(params['waypoints']))
     else: # driving counter clock wise.
         return params['waypoints']
+
 
 def up_sample(waypoints, factor):
     p = waypoints
